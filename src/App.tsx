@@ -218,9 +218,10 @@ function App() {
         )}
 
 
+
         {selectedMovie && (
           <div
-            className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-3 sm:p-6"
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 setSelectedMovie(null);
@@ -228,48 +229,72 @@ function App() {
             }}
           >
             <div
-              className="relative bg-white rounded-2xl shadow-xl p-6 w-full max-w-3xl"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="movie-title"
+              className="relative bg-white rounded-2xl shadow-xl
+                 p-4 sm:p-6 w-full max-w-3xl
+                 max-h-[90dvh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelectedMovie(null)}
-                className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-red-500"
+                aria-label="Close movie details"
+                className="absolute top-3 right-3 z-10
+                   w-10 h-10 rounded-full bg-white shadow-md
+                   text-2xl font-bold text-gray-600
+                   hover:text-red-500 cursor-pointer"
               >
-                x
+                ×
               </button>
 
-              <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
                 {selectedMovie.poster_path ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`}
                     alt={selectedMovie.title}
-                    className="w-full md:w-64 rounded-xl object-cover"
+                    className="w-full max-w-56 mx-auto
+                       md:w-64 md:max-w-none md:mx-0
+                       h-auto object-contain rounded-xl
+                       self-start shrink-0"
                   />
                 ) : (
-                  <div className="w-full md:w-64 h-80 bg-gray-200 rounded-xl flex items-center justify-center">
+                  <div className="w-full max-w-56 mx-auto md:w-64
+                          md:max-w-none md:mx-0 shrink-0
+                          h-72 bg-gray-200 rounded-xl
+                          flex items-center justify-center">
                     No Poster
                   </div>
                 )}
 
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <h2
-                    className="text-3xl font-bold mb-4 pr-8"
+                    id="movie-title"
+                    className="text-xl sm:text-2xl md:text-3xl
+                       font-bold mb-3 md:mb-4
+                       text-center md:text-left md:pr-8"
                   >
                     {selectedMovie.title}
                   </h2>
 
-                  <p className="text-gray-600 mb-3">
-                    Release Date: {selectedMovie.release_date.split("-").reverse().join("-") || "N/A"}
+                  <p className="text-sm md:text-base text-gray-600
+                        mb-3 text-center md:text-left">
+                    Release Date:{" "}
+                    {selectedMovie.release_date
+                      ? selectedMovie.release_date.split("-").reverse().join("-")
+                      : "N/A"}
                   </p>
 
-                  <p className="text-lg font-semibold mb-4">
+                  <p className="text-base md:text-lg font-semibold
+                        mb-4 text-center md:text-left">
                     ⭐ {selectedMovie.vote_average.toFixed(1)} / 10
                   </p>
 
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-lg md:text-xl font-semibold mb-2">
                     Overview
                   </h3>
 
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-700
+                        leading-relaxed break-words">
                     {selectedMovie.overview || "No overview available."}
                   </p>
                 </div>
@@ -277,6 +302,7 @@ function App() {
             </div>
           </div>
         )}
+
 
 
         {!loading && !error && movies.length === 0 && activeTab === "Search" && (
