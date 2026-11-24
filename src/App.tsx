@@ -229,16 +229,12 @@ function App() {
             }}
           >
             <div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="movie-title"
               className="relative bg-white rounded-2xl shadow-xl
                  p-4 sm:p-6 w-full max-w-3xl
                  max-h-[90dvh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelectedMovie(null)}
-                aria-label="Close movie details"
                 className="absolute top-3 right-3 z-10
                    w-10 h-10 rounded-full bg-white shadow-md
                    text-2xl font-bold text-gray-600
@@ -294,7 +290,7 @@ function App() {
                   </h3>
 
                   <p className="text-sm md:text-base text-gray-700
-                        leading-relaxed break-words">
+                        leading-relaxed">
                     {selectedMovie.overview || "No overview available."}
                   </p>
                 </div>
