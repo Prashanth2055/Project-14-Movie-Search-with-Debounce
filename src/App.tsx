@@ -293,6 +293,22 @@ function App() {
                         leading-relaxed">
                     {selectedMovie.overview || "No overview available."}
                   </p>
+
+                  <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleFavorite(selectedMovie);
+                }}
+                className="absolute top-3 right-3 z-20 bg-white
+                 rounded-full p-3 shadow-md cursor-pointer"
+              >
+                {favorites.some((item) => item.id === selectedMovie.id) ? (
+                  <FaHeart className="text-red-500 text-xl" />
+                ) : (
+                  <FaRegHeart className="text-gray-600 text-xl" />
+                )}
+              </button>
                 </div>
               </div>
             </div>
