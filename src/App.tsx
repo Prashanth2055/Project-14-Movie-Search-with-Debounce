@@ -300,7 +300,7 @@ function App() {
                   e.stopPropagation()
                   toggleFavorite(selectedMovie);
                 }}
-                className="absolute top-3 right-3 z-20 bg-white
+                className="absolute top-3 left-3 z-20 bg-white
                  rounded-full p-3 shadow-md cursor-pointer"
               >
                 {favorites.some((item) => item.id === selectedMovie.id) ? (
